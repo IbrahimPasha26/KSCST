@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+/* Custom Colors */
+:root {
+  --bg-green: #F0FDF4; /* green-50 */
+  --primary-green: #22C55E; /* green-500 */
+  --accent-blue: #3B82F6; /* blue-500 */
+  --text-dark: #0F172A; /* slate-900 */
+  --success-green: #10B981;
+  --error-red: #EF4444;
+  --primary-blue: #1E40AF; /* indigo-800 */
+  --neutral-gray: #E5E7EB; /* gray-200 */
+  --indigo-dark: #1E3A8A; /* indigo-900 */
+}
+
+/* Header Styling */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background: var(--primary-blue);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid var(--indigo-dark);
+}
+
+/* Glassmorphic Card */
+.glassmorphic {
+  background: rgba(240, 253, 244, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(240, 253, 244, 0.5);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  border-radius: 16px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glassmorphic:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Glassmorphic Button */
+.glassmorphic-btn {
+  background: rgba(240, 253, 244, 0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(240, 253, 244, 0.4);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.glassmorphic-btn:hover {
+  background: rgba(240, 253, 244, 0.3);
+  transform: scale(1.05);
+}
+
+/* Table Styles */
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+th, td {
+  border: none;
+}
+
+thead th {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+/* Sidebar Styles */
+aside.glassmorphic {
+  transition: width 0.3s ease-in-out;
+}
+
+aside.glassmorphic:hover {
+  width: 16rem !important;
+}
