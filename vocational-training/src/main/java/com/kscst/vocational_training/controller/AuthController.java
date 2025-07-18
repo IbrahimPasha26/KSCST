@@ -6,7 +6,6 @@ import com.kscst.vocational_training.model.Admin;
 import com.kscst.vocational_training.repository.TraineeRepository;
 import com.kscst.vocational_training.repository.TrainerRepository;
 import com.kscst.vocational_training.repository.AdminRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -15,17 +14,21 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/auth")
 public class AuthController {
 
-    @Autowired
-    private TraineeRepository traineeRepository;
+    private final TraineeRepository traineeRepository;
+    private final TrainerRepository trainerRepository;
+    private final AdminRepository adminRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private TrainerRepository trainerRepository;
-
-    @Autowired
-    private AdminRepository adminRepository;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    public AuthController(
+            TraineeRepository traineeRepository,
+            TrainerRepository trainerRepository,
+            AdminRepository adminRepository,
+            PasswordEncoder passwordEncoder) {
+        this.traineeRepository = traineeRepository;
+        this.trainerRepository = trainerRepository;
+        this.adminRepository = adminRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @PostMapping("/trainee/register")
     public ResponseEntity<String> registerTrainee(@RequestBody Trainee trainee) {

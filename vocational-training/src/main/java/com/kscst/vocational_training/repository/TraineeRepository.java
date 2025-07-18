@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface TraineeRepository extends MongoRepository<Trainee, String> {
     Trainee findByUsername(String username);
-    List<Trainee> findByAssignedTrainerId(String trainerId);
+    List<Trainee> findByStatus(String status);
+    List<Trainee> findByAssignedTrainerId(String assignedTrainerId);
 }

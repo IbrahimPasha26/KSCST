@@ -9,11 +9,12 @@ public class TrainingMaterial {
     @Id
     private String id;
     private String trainerId;
-    private String description;
+    private String title;
+    private String fileName;
     private String filePath;
     private String fileType;
 
-    // Getters and Setters
+    // Getters and setters
     public String getId() {
         return id;
     }
@@ -30,12 +31,20 @@ public class TrainingMaterial {
         this.trainerId = trainerId;
     }
 
-    public String getDescription() {
-        return description;
+    public String getTitle() {
+        return title;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 
     public String getFilePath() {

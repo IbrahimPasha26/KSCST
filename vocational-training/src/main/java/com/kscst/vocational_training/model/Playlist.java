@@ -12,7 +12,6 @@ public class Playlist {
     private String id;
     private String trainerId;
     private String title;
-    private String description;
     private String skill;
     private List<Video> videos;
 
@@ -20,7 +19,7 @@ public class Playlist {
         private String name;
         private String url;
 
-        // Getters and Setters
+        // Getters and setters
         public String getName() {
             return name;
         }
@@ -38,7 +37,7 @@ public class Playlist {
         }
     }
 
-    // Getters and Setters
+    // Getters and setters
     public String getId() {
         return id;
     }
@@ -61,14 +60,6 @@ public class Playlist {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String getSkill() {

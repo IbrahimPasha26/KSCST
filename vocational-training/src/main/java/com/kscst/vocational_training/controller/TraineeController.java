@@ -1,14 +1,15 @@
 package com.kscst.vocational_training.controller;
 
+import com.kscst.vocational_training.model.Certificate;
 import com.kscst.vocational_training.model.Playlist;
 import com.kscst.vocational_training.model.Progress;
 import com.kscst.vocational_training.model.Trainee;
 import com.kscst.vocational_training.model.TrainingMaterial;
+import com.kscst.vocational_training.repository.CertificateRepository;
 import com.kscst.vocational_training.repository.PlaylistRepository;
 import com.kscst.vocational_training.repository.ProgressRepository;
 import com.kscst.vocational_training.repository.TraineeRepository;
 import com.kscst.vocational_training.repository.TrainingMaterialRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -23,17 +24,24 @@ public class TraineeController {
 
     private static final Logger LOGGER = Logger.getLogger(TraineeController.class.getName());
 
-    @Autowired
-    private TraineeRepository traineeRepository;
+    private final TraineeRepository traineeRepository;
+    private final TrainingMaterialRepository trainingMaterialRepository;
+    private final ProgressRepository progressRepository;
+    private final PlaylistRepository playlistRepository;
+    private final CertificateRepository certificateRepository;
 
-    @Autowired
-    private TrainingMaterialRepository trainingMaterialRepository;
-
-    @Autowired
-    private ProgressRepository progressRepository;
-
-    @Autowired
-    private PlaylistRepository playlistRepository;
+    public TraineeController(
+            TraineeRepository traineeRepository,
+            TrainingMaterialRepository trainingMaterialRepository,
+            ProgressRepository progressRepository,
+            PlaylistRepository playlistRepository,
+            CertificateRepository certificateRepository) {
+        this.traineeRepository = traineeRepository;
+        this.trainingMaterialRepository = trainingMaterialRepository;
+        this.progressRepository = progressRepository;
+        this.playlistRepository = playlistRepository;
+        this.certificateRepository = certificateRepository;
+    }
 
     @GetMapping("/profile")
     public ResponseEntity<Trainee> getProfile(Authentication authentication) {
@@ -171,5 +179,23 @@ public class TraineeController {
         progressRepository.save(progress);
         LOGGER.info("Video progress marked for playlist ID: " + progressRequest.getPlaylistId() + ", video URL: " + progressRequest.getVideoUrl());
         return ResponseEntity.ok(progress);
+    }
+
+    @GetMapping("/certificate")
+    public ResponseEntity<Certificate> getCertificate(Authentication authentication) {
+        String username = authentication.getName();
+        LOGGER.info("Fetching certificate for trainee: " + username);
+        Trainee trainee = traineeRepository.findByUsername(username);
+        if (trainee == null) {
+            LOGGER.warning("Trainee not found: " + username);
+            return ResponseEntity.notFound().build();
+        }
+        Certificate certificate = certificateRepository.findByTraineeId(trainee.getId());
+        if (certificate == null) {
+            LOGGER.info("No certificate found for trainee ID: " + trainee.getId());
+            return ResponseEntity.notFound().build();
+        }
+        LOGGER.info("Certificate fetched for trainee ID: " + trainee.getId());
+        return ResponseEntity.ok(certificate);
     }
 }

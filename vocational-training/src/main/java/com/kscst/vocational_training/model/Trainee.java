@@ -15,11 +15,11 @@ public class Trainee {
     private String phone;
     private String skill;
     private String location;
-    private String role = "TRAINEE";
-    private String status = "PENDING";
     private String assignedTrainerId;
+    private String status;
+    private String role;
 
-    // Getters and Setters
+    // Getters and setters
     public String getId() {
         return id;
     }
@@ -84,12 +84,12 @@ public class Trainee {
         this.location = location;
     }
 
-    public String getRole() {
-        return role;
+    public String getAssignedTrainerId() {
+        return assignedTrainerId;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setAssignedTrainerId(String assignedTrainerId) {
+        this.assignedTrainerId = assignedTrainerId;
     }
 
     public String getStatus() {
@@ -100,11 +100,11 @@ public class Trainee {
         this.status = status;
     }
 
-    public String getAssignedTrainerId() {
-        return assignedTrainerId;
+    public String getRole() {
+        return role;
     }
 
-    public void setAssignedTrainerId(String assignedTrainerId) {
-        this.assignedTrainerId = assignedTrainerId;
+    public void setRole(String role) {
+        this.role = role;
     }
 }
